@@ -143,7 +143,7 @@ summary = response.json()["summary"]
 
 ## 🌐 Live Demo
 
-- **Frontend Application**: [Vercel Deployment](https://frontend-d5n0voz6g-brooks69s-projects.vercel.app)
+- **Frontend Application**: [Vercel Deployment](https://edusummarizer-hub.vercel.app)
 - **Backend API**: [Railway Deployment](https://edusummarizer-backend.up.railway.app)
 - **Interactive Demo**: [Watch Video](./docs/demo.mp4)
 
