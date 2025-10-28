@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSummarizer Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-blue-600 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">EduSummarizer Hub</h1>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:underline transition duration-300">Home</a>
+                <a href="upload.html" class="hover:underline transition duration-300">Upload</a>
+                <a href="dashboard.html" class="hover:underline transition duration-300">Dashboard</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden focus:outline-none focus:ring-2 focus:ring-white rounded p-1">
+                <svg class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path id="close-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" class="opacity-0"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 border-t border-blue-500 pt-4 transform transition-all duration-300 ease-in-out">
+            <div class="flex flex-col space-y-3">
+                <a href="index.html" class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300 block">Home</a>
+                <a href="upload.html" class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300 block">Upload</a>
+                <a href="dashboard.html" class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300 block">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto mt-8 px-4">
+        <div class="text-center">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Welcome to EduSummarizer Hub</h2>
+            <p class="text-xl text-gray-600 mb-8">Upload your educational content and let AI help you learn better!</p>
+
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl font-semibold mb-4">📄 Summarize</h3>
+                    <p>Get concise summaries of your lecture notes and articles.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl font-semibold mb-4">🌍 Translate</h3>
+                    <p>Translate content to multiple languages for global learning.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl font-semibold mb-4">🧠 Quiz</h3>
+                    <p>Test your knowledge with AI-generated quizzes.</p>
+                </div>
+            </div>
+
+            <a href="upload.html" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold mt-8 hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                Get Started
+            </a>
+        </div>
+    </main>
+
+    <script src="script.min.js"></script>
+</body>
+</html>

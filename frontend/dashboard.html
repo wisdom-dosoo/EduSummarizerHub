@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - EduSummarizer Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-blue-600 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">EduSummarizer Hub</h1>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:underline transition duration-300">Home</a>
+                <a href="upload.html" class="hover:underline transition duration-300">Upload</a>
+                <a href="dashboard.html" class="hover:underline transition duration-300">Dashboard</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden focus:outline-none focus:ring-2 focus:ring-white rounded p-1">
+                <svg class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path id="close-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" class="opacity-0"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 border-t border-blue-500 pt-4 transform transition-all duration-300 ease-in-out">
+            <div class="flex flex-col space-y-3">
+                <a href="index.html" class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300 block">Home</a>
+                <a href="upload.html" class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300 block">Upload</a>
+                <a href="dashboard.html" class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300 block">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto mt-6 md:mt-8 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">Your Learning Dashboard</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                <div class="bg-white p-4 md:p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition duration-300">
+                    <h3 class="text-2xl md:text-3xl font-bold text-blue-600" id="totalSummaries">0</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Summaries Created</p>
+                </div>
+                <div class="bg-white p-4 md:p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition duration-300">
+                    <h3 class="text-2xl md:text-3xl font-bold text-green-600" id="totalQuizzes">0</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Quizzes Taken</p>
+                </div>
+                <div class="bg-white p-4 md:p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition duration-300 sm:col-span-2 md:col-span-1">
+                    <h3 class="text-2xl md:text-3xl font-bold text-purple-600" id="avgScore">0%</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Average Score</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md">
+                <h3 class="text-lg md:text-xl font-semibold mb-3 md:mb-4">Recent Activity</h3>
+                <div id="recentActivity" class="space-y-3 md:space-y-4">
+                    <p class="text-gray-500 text-center text-sm md:text-base">No recent activity</p>
+                </div>
+            </div>
+
+            <div class="mt-6 md:mt-8 text-center">
+                <a href="upload.html" class="inline-block bg-blue-600 text-white py-3 px-6 rounded-lg text-base md:text-lg font-semibold hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                    Upload New Content
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

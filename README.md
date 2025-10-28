@@ -53,6 +53,14 @@ An AI-powered educational platform that helps students summarize, translate, and
 - POST /translate: Translate text
 - POST /quiz: Generate quiz questions
 
+## Demo
+- Frontend: [Deployed on Vercel](https://frontend-d5n0voz6g-brooks69s-projects.vercel.app)
+- Backend API: [Deployed on Railway](https://edusummarizer-backend.up.railway.app)
+
+## Screenshots and Demo
+- [Screenshots](./docs/screenshots/)
+- [Demo Video](./docs/demo.mp4)
+
 ## Contributing
 Feel free to fork and contribute. This is a portfolio project for demonstration purposes.
 

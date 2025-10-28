@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary - EduSummarizer Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-blue-600 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">EduSummarizer Hub</h1>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:underline transition duration-300">Home</a>
+                <a href="upload.html" class="hover:underline transition duration-300">Upload</a>
+                <a href="dashboard.html" class="hover:underline transition duration-300">Dashboard</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden focus:outline-none focus:ring-2 focus:ring-white rounded p-1">
+                <svg class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path id="close-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" class="opacity-0"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 border-t border-blue-500 pt-4 transform transition-all duration-300 ease-in-out">
+            <div class="flex flex-col space-y-3">
+                <a href="index.html" class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300 block">Home</a>
+                <a href="upload.html" class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300 block">Upload</a>
+                <a href="dashboard.html" class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300 block">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto mt-6 md:mt-8 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">Content Summary</h2>
+
+            <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                <div class="bg-white p-4 md:p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg md:text-xl font-semibold mb-3 md:mb-4">Original Text</h3>
+                    <div id="originalText" class="text-gray-700 max-h-80 md:max-h-96 overflow-y-auto text-sm md:text-base leading-relaxed">
+                        Loading...
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 md:p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg md:text-xl font-semibold mb-3 md:mb-4">AI Summary</h3>
+                    <div id="summaryText" class="text-gray-700 text-sm md:text-base leading-relaxed">
+                        Generating summary...
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 md:mt-8 bg-white p-4 md:p-6 rounded-lg shadow-md">
+                <h3 class="text-lg md:text-xl font-semibold mb-3 md:mb-4">Translate Summary</h3>
+                <div class="flex flex-col sm:flex-row gap-3 md:gap-4 mb-4">
+                    <select id="targetLang" class="px-3 py-2 border border-gray-300 rounded-md text-sm md:text-base flex-1">
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="it">Italian</option>
+                        <option value="pt">Portuguese</option>
+                        <option value="zh">Chinese</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                    </select>
+                    <button id="translateBtn" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300 transform hover:scale-105 text-sm md:text-base font-semibold whitespace-nowrap">
+                        Translate
+                    </button>
+                </div>
+                <div id="translatedText" class="text-gray-700 hidden text-sm md:text-base leading-relaxed p-3 bg-gray-50 rounded-md">
+                    <!-- Translated text will appear here -->
+                </div>
+            </div>
+
+            <div class="mt-6 md:mt-8 text-center">
+                <a href="quiz.html" class="inline-block bg-purple-600 text-white py-3 px-6 rounded-lg text-base md:text-lg font-semibold hover:bg-purple-700 transition duration-300 transform hover:scale-105">
+                    Take Quiz on This Content
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
