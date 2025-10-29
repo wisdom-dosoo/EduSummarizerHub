@@ -12,5 +12,8 @@ function createFooter() {
 
 // Auto-insert footer when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    document.body.insertAdjacentHTML('beforeend', createFooter());
+    console.log('Footer script loaded, inserting footer...');
+    const footerHTML = createFooter();
+    document.body.insertAdjacentHTML('beforeend', footerHTML);
+    console.log('Footer inserted:', footerHTML);
 });
