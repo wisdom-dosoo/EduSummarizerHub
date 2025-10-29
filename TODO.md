@@ -3,8 +3,8 @@
 This TODO outlines prioritized improvements to transform the project into a scalable freemium platform. Tasks are grouped by phase for logical implementation order.
 
 ## Phase 1: Core Freemium Foundation (Auth + Tiers)
-- [ ] Implement user authentication (email/password + OAuth with Google/GitHub)
-- [ ] Set up database (PostgreSQL or MongoDB) for user data and usage tracking
+- [x] Implement user authentication (email/password + OAuth with Google/GitHub)
+- [ ] Set up database (MongoDB) for user data and usage tracking
 - [ ] Add JWT-based session management and password hashing
 - [ ] Create freemium tiers: Free (10 summaries/month, 3 languages) vs Premium ($9.99/month, unlimited)
 - [ ] Integrate Stripe for premium subscriptions

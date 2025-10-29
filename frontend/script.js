@@ -1,6 +1,6 @@
 // EduSummarizer Hub - Frontend JavaScript
 
-const API_BASE = 'https://edusummarizer-backend.up.railway.app'; // Deployed backend URL
+const API_BASE = 'http://localhost:8000'; // Local backend URL for development
 
 // Global variables for storing data
 let currentText = '';
@@ -8,6 +8,8 @@ let currentSummary = '';
 let currentQuiz = [];
 let currentQuestionIndex = 0;
 let userAnswers = [];
+let currentUser = null;
+let authToken = null;
 
 // Mobile menu functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -71,6 +73,37 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('totalSummaries')) {
         loadDashboard();
     }
+
+    // Auth forms
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', handleLogin);
+    }
+
+    const signupForm = document.getElementById('signupForm');
+    if (signupForm) {
+        signupForm.addEventListener('submit', handleSignup);
+    }
+
+    // OAuth buttons
+    const googleLoginBtn = document.getElementById('googleLogin');
+    if (googleLoginBtn) {
+        googleLoginBtn.addEventListener('click', handleGoogleLogin);
+    }
+
+    const githubLoginBtn = document.getElementById('githubLogin');
+    if (githubLoginBtn) {
+        githubLoginBtn.addEventListener('click', handleGithubLogin);
+    }
+
+    // Logout button
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', handleLogout);
+    }
+
+    // Check if user is logged in
+    checkAuthStatus();
 });
 
 async function handleUpload(e) {
@@ -98,8 +131,14 @@ async function handleUpload(e) {
             const formData = new FormData();
             formData.append('file', fileInput.files[0]);
 
+            const headers = {};
+            if (authToken) {
+                headers['Authorization'] = `Bearer ${authToken}`;
+            }
+
             const response = await fetch(`${API_BASE}/upload/`, {
                 method: 'POST',
+                headers: headers,
                 body: formData
             });
 
@@ -112,9 +151,13 @@ async function handleUpload(e) {
         currentText = text;
 
         // Generate summary
+        const headers = { 'Content-Type': 'application/json' };
+        if (authToken) {
+            headers['Authorization'] = `Bearer ${authToken}`;
+        }
         const summaryResponse = await fetch(`${API_BASE}/summarize/`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: headers,
             body: JSON.stringify({ text: text })
         });
 
@@ -295,4 +338,142 @@ function loadDashboard() {
     }
 
     document.getElementById('totalSummaries').textContent = localStorage.getItem('currentSummary') ? '1' : '0';
+}
+
+// Authentication functions
+async function handleLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const btn = document.getElementById('loginBtn');
+    const message = document.getElementById('message');
+
+    btn.disabled = true;
+    message.classList.add('hidden');
+
+    try {
+        const response = await fetch(`${API_BASE}/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            authToken = data.access_token;
+            localStorage.setItem('authToken', authToken);
+            await checkAuthStatus();
+            window.location.href = 'index.html';
+        } else {
+            message.textContent = data.detail || 'Login failed';
+            message.classList.remove('hidden');
+        }
+    } catch (error) {
+        message.textContent = 'Network error. Please try again.';
+        message.classList.remove('hidden');
+    } finally {
+        btn.disabled = false;
+    }
+}
+
+async function handleSignup(e) {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const btn = document.getElementById('signupBtn');
+    const message = document.getElementById('message');
+
+    btn.disabled = true;
+    message.classList.add('hidden');
+
+    try {
+        const response = await fetch(`${API_BASE}/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            authToken = data.access_token;
+            localStorage.setItem('authToken', authToken);
+            await checkAuthStatus();
+            window.location.href = 'index.html';
+        } else {
+            message.textContent = data.detail || 'Signup failed';
+            message.classList.remove('hidden');
+        }
+    } catch (error) {
+        message.textContent = 'Network error. Please try again.';
+        message.classList.remove('hidden');
+    } finally {
+        btn.disabled = false;
+    }
+}
+
+async function handleGoogleLogin() {
+    try {
+        const response = await fetch(`${API_BASE}/auth/google/login`);
+        const data = await response.json();
+        if (data.authorization_url) {
+            window.location.href = data.authorization_url;
+        }
+    } catch (error) {
+        alert('Google login failed. Please try again.');
+    }
+}
+
+async function handleGithubLogin() {
+    try {
+        const response = await fetch(`${API_BASE}/auth/github/login`);
+        const data = await response.json();
+        if (data.authorization_url) {
+            window.location.href = data.authorization_url;
+        }
+    } catch (error) {
+        alert('GitHub login failed. Please try again.');
+    }
+}
+
+async function checkAuthStatus() {
+    authToken = localStorage.getItem('authToken');
+    if (!authToken) return;
+
+    try {
+        const response = await fetch(`${API_BASE}/auth/me`, {
+            headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+
+        if (response.ok) {
+            currentUser = await response.json();
+            updateUIForLoggedInUser();
+        } else {
+            localStorage.removeItem('authToken');
+            authToken = null;
+        }
+    } catch (error) {
+        console.error('Auth check failed:', error);
+    }
+}
+
+function updateUIForLoggedInUser() {
+    const authLinks = document.getElementById('auth-links');
+    const userInfo = document.getElementById('user-info');
+    const userTier = document.getElementById('user-tier');
+
+    if (authLinks && userInfo && userTier) {
+        authLinks.classList.add('hidden');
+        userInfo.classList.remove('hidden');
+        userTier.textContent = currentUser.tier.toUpperCase();
+    }
+}
+
+function handleLogout() {
+    localStorage.removeItem('authToken');
+    authToken = null;
+    currentUser = null;
+    location.reload();
 }

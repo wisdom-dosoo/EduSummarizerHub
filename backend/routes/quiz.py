@@ -1,10 +1,12 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from typing import List
 from fastapi_cache.decorator import cache
 import requests
 import os
 import random
+from routes.auth import get_current_user
+from models import User, UserTier
 
 router = APIRouter(prefix="/quiz", tags=["quiz"])
 
@@ -22,6 +24,7 @@ class QuizQuestion(BaseModel):
 
 class QuizResponse(BaseModel):
     questions: List[QuizQuestion]
+    tier: str
 
 HUGGINGFACE_API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 QA_API_URL = "https://api-inference.huggingface.co/models/deepset/roberta-base-squad2"
@@ -38,9 +41,17 @@ QUESTION_TEMPLATES = [
 
 @router.post("/", response_model=QuizResponse)
 @cache(expire=3600)  # Cache for 1 hour
-async def generate_quiz(request: QuizRequest):
+async def generate_quiz(quiz_request: QuizRequest, current_user: User = Depends(get_current_user)):
+    request = quiz_request
     if len(request.summary.strip()) == 0:
         raise HTTPException(status_code=400, detail="Summary cannot be empty")
+
+    # Free tier limit: basic quizzes only
+    if current_user.tier == UserTier.FREE and request.num_questions > 3:
+        raise HTTPException(
+            status_code=403,
+            detail="Free tier allows up to 3 questions per quiz. Upgrade to premium for unlimited questions."
+        )
 
     questions = []
 
@@ -76,4 +87,4 @@ async def generate_quiz(request: QuizRequest):
         random.shuffle(options)
         questions.append(QuizQuestion(question=question_text, options=options))
 
-    return QuizResponse(questions=questions)
+    return QuizResponse(questions=questions, tier=current_user.tier.value)
