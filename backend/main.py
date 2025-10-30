@@ -34,8 +34,7 @@ async def health_check():
     return {"status": "healthy"}
 
 # Include routers
-from routes import upload, summarize, translate, quiz, auth, stripe
-app.include_router(auth.router)
+from routes import upload, summarize, translate, quiz, stripe
 app.include_router(stripe.router)
 app.include_router(upload.router)
 app.include_router(summarize.router)
