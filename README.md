@@ -15,6 +15,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-green.svg)](https://fastapi.tiangolo.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-6.0+-green.svg)](https://www.mongodb.com/)
 [![HuggingFace](https://img.shields.io/badge/🤗-HuggingFace-yellow.svg)](https://huggingface.co/)
+[![Stripe](https://img.shields.io/badge/Stripe-Payments-blue.svg)](https://stripe.com/)
 
 </div>
 
@@ -33,6 +34,18 @@ EduSummarizer Hub is a cutting-edge AI-powered educational platform that revolut
 - **Multilingual Translation**: Break language barriers with support for 50+ languages
 - **Intelligent Quizzing**: AI-generated questions that adapt to your learning progress
 - **Progress Analytics**: Comprehensive dashboard tracking your learning journey
+
+### 💰 Freemium Business Model
+- **Free Tier**: 10 summaries/month, 3 languages, 3 quiz questions
+- **Premium Tier**: Unlimited access for $9.99/month
+- **Usage Tracking**: Real-time monitoring of your monthly limits
+- **Seamless Upgrades**: One-click premium subscription via Stripe
+
+### 🔐 Secure Authentication
+- **JWT-Based Sessions**: Secure token authentication with 30-minute expiration
+- **Password Security**: Argon2 hashing for industry-standard protection
+- **OAuth Ready**: Prepared for Google/GitHub social login integration
+- **User Management**: Profile management and tier tracking
 
 ### 📱 User Experience
 - **Responsive Design**: Seamless experience across desktop, tablet, and mobile devices
@@ -56,8 +69,9 @@ EduSummarizer Hub is a cutting-edge AI-powered educational platform that revolut
 | **Database** | MongoDB | NoSQL document database for flexibility |
 | **AI/ML** | HuggingFace Transformers | State-of-the-art NLP models |
 | **Caching** | Redis | High-speed data caching |
+| **Authentication** | JWT + Argon2 | Secure user authentication |
+| **Payments** | Stripe | Premium subscription processing |
 | **Hosting** | Vercel + Railway | Scalable cloud deployment |
-| **Authentication** | Supabase | Optional user management |
 
 ## 🚀 Quick Start
 
@@ -65,6 +79,7 @@ EduSummarizer Hub is a cutting-edge AI-powered educational platform that revolut
 - Python 3.8 or higher
 - MongoDB (local or Atlas cloud)
 - HuggingFace API token
+- Stripe account (for payments)
 - Git
 
 ### Installation
@@ -102,15 +117,18 @@ EduSummarizer Hub is a cutting-edge AI-powered educational platform that revolut
 5. **Access the Application**
    - Frontend: http://localhost:3000
    - API Docs: http://localhost:8000/docs
+   - Admin Dashboard: http://localhost:3000/dashboard
 
 ## 📖 Usage Guide
 
 ### For Students
-1. **Upload Content**: Drag & drop or select text files/articles
-2. **AI Summarization**: Get intelligent summaries in seconds
-3. **Language Translation**: Translate to your preferred language
-4. **Interactive Learning**: Take AI-generated quizzes
-5. **Track Progress**: Monitor your learning analytics
+1. **Sign Up**: Create a free account or login to existing account
+2. **Upload Content**: Drag & drop or select text files/articles
+3. **AI Summarization**: Get intelligent summaries in seconds
+4. **Language Translation**: Translate to your preferred language (limited to 3 for free users)
+5. **Interactive Learning**: Take AI-generated quizzes (limited to 3 questions for free users)
+6. **Track Progress**: Monitor your learning analytics and usage limits
+7. **Upgrade**: Unlock unlimited access with premium subscription
 
 ### For Educators
 - Create engaging learning materials
@@ -120,14 +138,22 @@ EduSummarizer Hub is a cutting-edge AI-powered educational platform that revolut
 
 ## 🔌 API Reference
 
+### Authentication Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/auth/register` | User registration |
+| `POST` | `/auth/login` | User login with JWT token |
+| `GET` | `/auth/me` | Get current user profile |
+
 ### Core Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | `POST` | `/upload` | Upload and process text files |
-| `POST` | `/summarize` | Generate AI-powered summaries |
-| `POST` | `/translate` | Translate text between languages |
-| `POST` | `/quiz` | Generate interactive quiz questions |
+| `POST` | `/summarize` | Generate AI-powered summaries (usage limited) |
+| `POST` | `/translate` | Translate text between languages (language limited) |
+| `POST` | `/quiz` | Generate interactive quiz questions (question limited) |
 | `GET` | `/health` | API health check |
 
 ### Example API Usage
@@ -135,9 +161,15 @@ EduSummarizer Hub is a cutting-edge AI-powered educational platform that revolut
 ```python
 import requests
 
-# Summarize text
+# Register user
+response = requests.post("http://localhost:8000/auth/register",
+    json={"username": "student", "email": "student@example.com", "password": "securepass"})
+token = response.json()["access_token"]
+
+# Use authenticated endpoint
+headers = {"Authorization": f"Bearer {token}"}
 response = requests.post("http://localhost:8000/summarize",
-    json={"text": "Your long text here..."})
+    json={"text": "Your long text here..."}, headers=headers)
 summary = response.json()["summary"]
 ```
 
@@ -158,14 +190,20 @@ summary = response.json()["summary"]
 
 ```
 EduSummarizer Hub/
-├── frontend/          # React-inspired vanilla JS application
-│   ├── index.html     # Landing page
-│   ├── script.js      # Main application logic
+├── frontend/          # Vanilla JS application with auth UI
+│   ├── index.html     # Landing page with login/signup links
+│   ├── login.html     # User authentication page
+│   ├── signup.html    # User registration page
+│   ├── script.js      # Main application logic with auth
 │   └── styles.css     # TailwindCSS styling
-├── backend/           # FastAPI microservices
-│   ├── main.py        # Application entry point
+├── backend/           # FastAPI microservices with auth
+│   ├── main.py        # Application entry point with auth middleware
 │   ├── routes/        # API endpoint modules
-│   └── models.py      # Pydantic data models
+│   │   ├── auth.py    # Authentication endpoints
+│   │   ├── stripe.py  # Payment processing
+│   │   └── ...        # Other feature routes
+│   ├── models.py      # Pydantic data models with user tiers
+│   └── database.py    # MongoDB connection and collections
 ├── docs/              # Documentation and assets
 └── README.md          # This file
 ```
@@ -181,6 +219,18 @@ pytest
 # Frontend tests (if implemented)
 cd frontend
 npm test
+```
+
+### Environment Variables
+Create a `.env` file in the backend directory:
+
+```env
+SECRET_KEY=your-jwt-secret-key-here
+MONGODB_URL=mongodb://localhost:27017/edusummarizer
+HUGGINGFACE_API_KEY=your-huggingface-api-key
+STRIPE_SECRET_KEY=your-stripe-secret-key
+STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
+REDIS_URL=redis://localhost
 ```
 
 ### Contributing
@@ -216,6 +266,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **FastAPI** community for the amazing web framework
 - **TailwindCSS** for the utility-first CSS framework
 - **MongoDB** for the flexible document database
+- **Stripe** for secure payment processing
+- **Argon2** for modern password hashing
 
 ## 📞 Contact
 
