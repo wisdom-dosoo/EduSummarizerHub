@@ -6,7 +6,7 @@ from routes.auth import get_current_user
 from models import User, UserTier
 from database import users_collection
 
-router = APIRouter(prefix="/stripe", tags=["stripe"])
+router = APIRouter(prefix="/stripe", tags=["Stripe"])
 
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 

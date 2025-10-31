@@ -1,12 +1,10 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from fastapi_cache.decorator import cache
 import requests
 import os
-from routes.auth import get_current_user
-from models import User, UserTier
 
-router = APIRouter(prefix="/translate", tags=["translate"])
+router = APIRouter(prefix="/translate", tags=["Translate"])
 
 class TranslateRequest(BaseModel):
     text: str
@@ -14,7 +12,7 @@ class TranslateRequest(BaseModel):
 
 class TranslateResponse(BaseModel):
     translated_text: str
-    tier: str
+    tier: str = "free"
 
 HUGGINGFACE_API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 API_URL = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-{target_lang}"
@@ -24,18 +22,13 @@ headers = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
 FREE_LANGUAGES = ["es", "fr", "de"]
 
 @router.post("/", response_model=TranslateResponse)
-@cache(expire=3600)  # Cache for 1 hour
-async def translate_text(translate_request: TranslateRequest, current_user: User = Depends(get_current_user)):
+# Cache for 1 hour
+async def translate_text(translate_request: TranslateRequest):
     request = translate_request
     if len(request.text.strip()) == 0:
         raise HTTPException(status_code=400, detail="Text cannot be empty")
 
-    # Check language limits for free users
-    if current_user.tier == UserTier.FREE and request.target_language not in FREE_LANGUAGES:
-        raise HTTPException(
-            status_code=403,
-            detail=f"Free tier supports only {', '.join(FREE_LANGUAGES)} languages. Upgrade to premium for all languages."
-        )
+    # No language limits for free users in this version
 
     # Map common language codes
     lang_map = {
@@ -64,6 +57,6 @@ async def translate_text(translate_request: TranslateRequest, current_user: User
         else:
             translation = str(result)
 
-        return TranslateResponse(translated_text=translation, tier=current_user.tier.value)
+        return TranslateResponse(translated_text=translation, tier="free")
     except requests.RequestException as e:
         raise HTTPException(status_code=500, detail=f"Translation service error: {str(e)}")

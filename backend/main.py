@@ -22,8 +22,20 @@ app.add_middleware(
 # Initialize cache
 @ app.on_event("startup")
 async def startup():
-    redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
-    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+    try:
+        redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
+        FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+    except Exception as e:
+        print(f"Redis not available, running without cache: {e}")
+        # Continue without cache if Redis is not available
+
+# Include routers
+from routes import upload, summarize, translate, quiz
+app.include_router(upload.router)
+app.include_router(summarize.router)
+app.include_router(translate.router)
+app.include_router(quiz.router)
+
 
 @app.get("/")
 async def root():
@@ -32,14 +44,6 @@ async def root():
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}
-
-# Include routers
-from routes import upload, summarize, translate, quiz, stripe
-app.include_router(stripe.router)
-app.include_router(upload.router)
-app.include_router(summarize.router)
-app.include_router(translate.router)
-app.include_router(quiz.router)
 
 if __name__ == "__main__":
     import uvicorn

@@ -1,14 +1,11 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List
-from fastapi_cache.decorator import cache
 import requests
 import os
 import random
-from routes.auth import get_current_user
-from models import User, UserTier
 
-router = APIRouter(prefix="/quiz", tags=["quiz"])
+router = APIRouter(prefix="/quiz", tags=["Quiz"])
 
 class QuizRequest(BaseModel):
     summary: str
@@ -24,7 +21,7 @@ class QuizQuestion(BaseModel):
 
 class QuizResponse(BaseModel):
     questions: List[QuizQuestion]
-    tier: str
+    tier: str = "free"
 
 HUGGINGFACE_API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 QA_API_URL = "https://api-inference.huggingface.co/models/deepset/roberta-base-squad2"
@@ -40,26 +37,19 @@ QUESTION_TEMPLATES = [
 ]
 
 @router.post("/", response_model=QuizResponse)
-@cache(expire=3600)  # Cache for 1 hour
-async def generate_quiz(quiz_request: QuizRequest, current_user: User = Depends(get_current_user)):
-    request = quiz_request
-    if len(request.summary.strip()) == 0:
+async def generate_quiz(quiz_request: QuizRequest):
+    if len(quiz_request.summary.strip()) == 0:
         raise HTTPException(status_code=400, detail="Summary cannot be empty")
 
-    # Free tier limit: basic quizzes only
-    if current_user.tier == UserTier.FREE and request.num_questions > 3:
-        raise HTTPException(
-            status_code=403,
-            detail="Free tier allows up to 3 questions per quiz. Upgrade to premium for unlimited questions."
-        )
+    # No limits in this version
 
     questions = []
 
     # Extract key phrases from summary (simple approach)
-    words = request.summary.split()
-    key_phrases = [word for word in words if len(word) > 4][:request.num_questions]
+    words = quiz_request.summary.split()
+    key_phrases = [word for word in words if len(word) > 4][:quiz_request.num_questions]
 
-    for i in range(min(request.num_questions, len(key_phrases))):
+    for i in range(min(quiz_request.num_questions, len(key_phrases))):
         phrase = key_phrases[i]
 
         # Generate question
@@ -87,4 +77,4 @@ async def generate_quiz(quiz_request: QuizRequest, current_user: User = Depends(
         random.shuffle(options)
         questions.append(QuizQuestion(question=question_text, options=options))
 
-    return QuizResponse(questions=questions, tier=current_user.tier.value)
+    return QuizResponse(questions=questions, tier="free")
