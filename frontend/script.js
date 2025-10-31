@@ -8,8 +8,6 @@ let currentSummary = '';
 let currentQuiz = [];
 let currentQuestionIndex = 0;
 let userAnswers = [];
-let currentUser = null;
-let authToken = null;
 
 // Mobile menu functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -103,14 +101,8 @@ async function handleUpload(e) {
             const formData = new FormData();
             formData.append('file', fileInput.files[0]);
 
-            const headers = {};
-            if (authToken) {
-                headers['Authorization'] = `Bearer ${authToken}`;
-            }
-
             const response = await fetch(`${API_BASE}/upload/`, {
                 method: 'POST',
-                headers: headers,
                 body: formData
             });
 
@@ -123,13 +115,9 @@ async function handleUpload(e) {
         currentText = text;
 
         // Generate summary
-        const headers = { 'Content-Type': 'application/json' };
-        if (authToken) {
-            headers['Authorization'] = `Bearer ${authToken}`;
-        }
         const summaryResponse = await fetch(`${API_BASE}/summarize/`, {
             method: 'POST',
-            headers: headers,
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text: text })
         });
 

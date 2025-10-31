@@ -9,6 +9,5 @@ client = AsyncIOMotorClient(MONGODB_URL)
 database = client.edusummarizer
 
 # Collections
-users_collection = database.users
 summaries_collection = database.summaries
 quizzes_collection = database.quizzes

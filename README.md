@@ -15,7 +15,6 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-green.svg)](https://fastapi.tiangolo.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-6.0+-green.svg)](https://www.mongodb.com/)
 [![HuggingFace](https://img.shields.io/badge/🤗-HuggingFace-yellow.svg)](https://huggingface.co/)
-[![Stripe](https://img.shields.io/badge/Stripe-Payments-blue.svg)](https://stripe.com/)
 
 </div>
 
@@ -34,18 +33,6 @@ EduSummarizer Hub is a cutting-edge AI-powered educational platform that revolut
 - **Multilingual Translation**: Break language barriers with support for 50+ languages
 - **Intelligent Quizzing**: AI-generated questions that adapt to your learning progress
 - **Progress Analytics**: Comprehensive dashboard tracking your learning journey
-
-### 💰 Freemium Business Model
-- **Free Tier**: 10 summaries/month, 3 languages, 3 quiz questions
-- **Premium Tier**: Unlimited access for $9.99/month
-- **Usage Tracking**: Real-time monitoring of your monthly limits
-- **Seamless Upgrades**: One-click premium subscription via Stripe
-
-### 🔐 Secure Authentication
-- **JWT-Based Sessions**: Secure token authentication with 30-minute expiration
-- **Password Security**: Argon2 hashing for industry-standard protection
-- **OAuth Ready**: Prepared for Google/GitHub social login integration
-- **User Management**: Profile management and tier tracking
 
 ### 📱 User Experience
 - **Responsive Design**: Seamless experience across desktop, tablet, and mobile devices
@@ -69,8 +56,8 @@ EduSummarizer Hub is a cutting-edge AI-powered educational platform that revolut
 | **Database** | MongoDB | NoSQL document database for flexibility |
 | **AI/ML** | HuggingFace Transformers | State-of-the-art NLP models |
 | **Caching** | Redis | High-speed data caching |
-| **Authentication** | JWT + Argon2 | Secure user authentication |
-| **Payments** | Stripe | Premium subscription processing |
+| **Authentication** | N/A | Open source, no authentication required |
+| **Payments** | N/A | Open source, no payment processing |
 | **Hosting** | Vercel + Railway | Scalable cloud deployment |
 
 ## 🚀 Quick Start
@@ -79,7 +66,6 @@ EduSummarizer Hub is a cutting-edge AI-powered educational platform that revolut
 - Python 3.8 or higher
 - MongoDB (local or Atlas cloud)
 - HuggingFace API token
-- Stripe account (for payments)
 - Git
 
 ### Installation
@@ -122,13 +108,11 @@ EduSummarizer Hub is a cutting-edge AI-powered educational platform that revolut
 ## 📖 Usage Guide
 
 ### For Students
-1. **Sign Up**: Create a free account or login to existing account
-2. **Upload Content**: Drag & drop or select text files/articles
-3. **AI Summarization**: Get intelligent summaries in seconds
-4. **Language Translation**: Translate to your preferred language (limited to 3 for free users)
-5. **Interactive Learning**: Take AI-generated quizzes (limited to 3 questions for free users)
-6. **Track Progress**: Monitor your learning analytics and usage limits
-7. **Upgrade**: Unlock unlimited access with premium subscription
+1. **Upload Content**: Drag & drop or select text files/articles
+2. **AI Summarization**: Get intelligent summaries in seconds
+3. **Language Translation**: Translate to your preferred language
+4. **Interactive Learning**: Take AI-generated quizzes
+5. **Track Progress**: Monitor your learning analytics
 
 ### For Educators
 - Create engaging learning materials
@@ -142,18 +126,16 @@ EduSummarizer Hub is a cutting-edge AI-powered educational platform that revolut
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `POST` | `/auth/register` | User registration |
-| `POST` | `/auth/login` | User login with JWT token |
-| `GET` | `/auth/me` | Get current user profile |
+| N/A | N/A | No authentication required for open source version |
 
 ### Core Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | `POST` | `/upload` | Upload and process text files |
-| `POST` | `/summarize` | Generate AI-powered summaries (usage limited) |
-| `POST` | `/translate` | Translate text between languages (language limited) |
-| `POST` | `/quiz` | Generate interactive quiz questions (question limited) |
+| `POST` | `/summarize` | Generate AI-powered summaries |
+| `POST` | `/translate` | Translate text between languages |
+| `POST` | `/quiz` | Generate interactive quiz questions |
 | `GET` | `/health` | API health check |
 
 ### Example API Usage
@@ -161,50 +143,53 @@ EduSummarizer Hub is a cutting-edge AI-powered educational platform that revolut
 ```python
 import requests
 
-# Register user
-response = requests.post("http://localhost:8000/auth/register",
-    json={"username": "student", "email": "student@example.com", "password": "securepass"})
-token = response.json()["access_token"]
-
-# Use authenticated endpoint
-headers = {"Authorization": f"Bearer {token}"}
+# Summarize text
 response = requests.post("http://localhost:8000/summarize",
-    json={"text": "Your long text here..."}, headers=headers)
+    json={"text": "Your long text here..."})
 summary = response.json()["summary"]
+
+# Translate text
+response = requests.post("http://localhost:8000/translate",
+    json={"text": "Hello world", "target_language": "es"})
+translation = response.json()["translated_text"]
+
+# Generate quiz
+response = requests.post("http://localhost:8000/quiz",
+    json={"summary": "Your summary here", "num_questions": 5})
+quiz = response.json()["questions"]
 ```
 
 ## 🌐 Live Demo
 
 - **Frontend Application**: [Vercel Deployment](https://edusummarizer-hub.vercel.app)
-- **Backend API**: [Render Deployment](https://edusummarizer-backend.up.railway.app)
-- **Interactive Demo**: [Watch Video](./docs/demo(2).mp4)
+- **Backend API**: [Render Deployment]
+- **Interactive Demo**: [Watch Video](./docs/demo.mp4)
 
 ## 📸 Screenshots
 
 <div align="center">
   <img src="./docs/screenshots/screenshot1.png" alt="Dashboard" width="400"/>
   <img src="./docs/screenshots/screenshot2.png" alt="Quiz Interface" width="400"/>
-  <img src="./docs/screenshots/translator.png" alt="Quiz Interface" width="400"/>
+  <img src="./docs/screenshots/translator.png" alt="Translator" width="400"/>
+  <img src="./docs/screenshots/backend.png" alt="FastAPI" width="400"/>
 </div>
 
 ## 🏗️ Architecture
 
 ```
 EduSummarizer Hub/
-├── frontend/          # Vanilla JS application with auth UI
-│   ├── index.html     # Landing page with login/signup links
-│   ├── login.html     # User authentication page
-│   ├── signup.html    # User registration page
-│   ├── script.js      # Main application logic with auth
+├── frontend/          # Vanilla JS application
+│   ├── index.html     # Landing page
+│   ├── upload.html    # Upload and process page
+│   ├── script.js      # Main application logic
 │   └── styles.css     # TailwindCSS styling
-├── backend/           # FastAPI microservices with auth
-│   ├── main.py        # Application entry point with auth middleware
+├── backend/           # FastAPI application
+│   ├── main.py        # Application entry point
 │   ├── routes/        # API endpoint modules
 │   │   ├── auth.py    # Authentication endpoints
-│   │   ├── stripe.py  # Payment processing
-│   │   └── ...        # Other feature routes
-│   ├── models.py      # Pydantic data models with user tiers
-│   └── database.py    # MongoDB connection and collections
+│   │   └── core.py    # Core AI endpoints
+│   ├── models.py      # Pydantic data models
+│   └── database.py    # MongoDB connection
 ├── docs/              # Documentation and assets
 └── README.md          # This file
 ```
@@ -226,11 +211,8 @@ npm test
 Create a `.env` file in the backend directory:
 
 ```env
-SECRET_KEY=your-jwt-secret-key-here
 MONGODB_URL=mongodb://localhost:27017/edusummarizer
 HUGGINGFACE_API_KEY=your-huggingface-api-key
-STRIPE_SECRET_KEY=your-stripe-secret-key
-STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
 REDIS_URL=redis://localhost
 ```
 
