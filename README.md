@@ -176,14 +176,15 @@ summary = response.json()["summary"]
 ## 🌐 Live Demo
 
 - **Frontend Application**: [Vercel Deployment](https://edusummarizer-hub.vercel.app)
-- **Backend API**: [Railway Deployment](https://edusummarizer-backend.up.railway.app)
-- **Interactive Demo**: [Watch Video](./docs/demo.mp4)
+- **Backend API**: [Render Deployment](https://edusummarizer-backend.up.railway.app)
+- **Interactive Demo**: [Watch Video](./docs/demo(2).mp4)
 
 ## 📸 Screenshots
 
 <div align="center">
   <img src="./docs/screenshots/screenshot1.png" alt="Dashboard" width="400"/>
   <img src="./docs/screenshots/screenshot2.png" alt="Quiz Interface" width="400"/>
+  <img src="./docs/screenshots/translator.png" alt="Quiz Interface" width="400"/>
 </div>
 
 ## 🏗️ Architecture
@@ -273,8 +274,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Wisdom Dosoo**
 - GitHub: [@wisdom-dosoo](https://github.com/wisdom-dosoo)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/your-profile)
-- Email: your.email@example.com
+- LinkedIn: [Your LinkedIn](https://linkedin.com/in/wisdomdosoo1)
+- Email: dosoowisdom1@gmail.com
 
 ---
 
