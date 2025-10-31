@@ -22,3 +22,13 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.swp
+
+# Generated files
+*.min.js
+*.min.css
+
+# Test files
+backend/test.*
+
+# Media files
+*.mp4
