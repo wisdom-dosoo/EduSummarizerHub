@@ -21,9 +21,6 @@ AI-powered educational content tools for students and educators. Transform your 
 ### Translation Feature
 ![Translation Feature](docs/screenshots/translator.png)
 
-### Dashboard
-![Dashboard](docs/screenshots/Screenshot%202025-11-03%20115608.png)
-
 ## 🚀 Features
 
 - **Smart Summaries**: AI-powered text summarization for lecture notes, articles, and documents
