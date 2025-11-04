@@ -1,273 +1,154 @@
-# EduSummarizer Hub 🚀
+# EduSummarizer Hub
 
-<div align="center">
-  <img src="./docs/screenshots/screenshot1.png" alt="EduSummarizer Hub" width="600"/>
-</div>
+AI-powered educational content tools for students and educators. Transform your learning materials with intelligent summaries, translations, and interactive quizzes.
 
-<p align="center">
-  <em>AI-Powered Educational Platform for Intelligent Learning</em>
-</p>
+## 🚀 Features
 
-<div align="center">
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-green.svg)](https://fastapi.tiangolo.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-6.0+-green.svg)](https://www.mongodb.com/)
-[![HuggingFace](https://img.shields.io/badge/🤗-HuggingFace-yellow.svg)](https://huggingface.co/)
-
-</div>
-
----
-
-## 🌟 Overview
-
-EduSummarizer Hub is a cutting-edge AI-powered educational platform that revolutionizes how students interact with learning materials. Upload your lecture notes or articles, and let our advanced AI models handle the rest - from intelligent summarization to multilingual translation and interactive quizzing.
-
-**Transform hours of reading into minutes of focused learning!**
-
-## ✨ Key Features
-
-### 🤖 AI-Powered Learning Tools
-- **Smart Summarization**: Advanced NLP models condense lengthy documents into concise, meaningful summaries
-- **Multilingual Translation**: Break language barriers with support for 50+ languages
-- **Intelligent Quizzing**: AI-generated questions that adapt to your learning progress
-- **Progress Analytics**: Comprehensive dashboard tracking your learning journey
-
-### 📱 User Experience
-- **Responsive Design**: Seamless experience across desktop, tablet, and mobile devices
-- **Intuitive Interface**: Clean, modern UI built with TailwindCSS
-- **Real-time Processing**: Instant results with optimized performance
-- **Offline Capability**: Local storage for continued learning without internet
-
-### 🔧 Technical Excellence
-- **High Performance**: Redis caching for lightning-fast API responses
-- **Scalable Architecture**: Microservices design ready for enterprise deployment
-- **Security First**: CORS protection and secure API endpoints
-- **Error Resilience**: Comprehensive error handling and rate limiting
+- **Smart Summaries**: AI-powered text summarization for lecture notes, articles, and documents
+- **Global Translation**: Translate content to 8+ languages (Spanish, French, German, Chinese, Japanese, Korean, Italian, Portuguese)
+- **Interactive Quizzes**: AI-generated quizzes to test knowledge and reinforce learning
+- **File Support**: Upload PDF, DOCX, TXT, CSV, XLSX files or paste text directly
+- **Sample Content**: Try the features with pre-loaded educational content
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
 
 ## 🛠️ Tech Stack
 
-| Component | Technology | Purpose |
-|-----------|------------|---------|
-| **Frontend** | HTML5, CSS3, JavaScript | Responsive user interface |
-| **Styling** | TailwindCSS | Modern, utility-first CSS framework |
-| **Backend** | Python FastAPI | High-performance async web framework |
-| **Database** | MongoDB | NoSQL document database for flexibility |
-| **AI/ML** | HuggingFace Transformers | State-of-the-art NLP models |
-| **Caching** | Redis | High-speed data caching |
-| **Authentication** | N/A | Open source, no authentication required |
-| **Payments** | N/A | Open source, no payment processing |
-| **Hosting** | Vercel + Railway | Scalable cloud deployment |
+### Backend
+- **FastAPI**: High-performance Python web framework
+- **AI Integration**: Hugging Face Transformers for summarization, OpenAI for translations
+- **File Processing**: Support for multiple document formats
+- **Caching**: Lightweight in-memory caching for API cost optimization
 
-## 🚀 Quick Start
+### Frontend
+- **HTML5/CSS3**: Modern responsive design with Tailwind CSS
+- **JavaScript**: Vanilla JS with async/await for API interactions
+- **Progressive Enhancement**: Works without JavaScript, enhanced with it
+
+## 📦 Installation & Setup
 
 ### Prerequisites
-- Python 3.8 or higher
-- MongoDB (local or Atlas cloud)
-- HuggingFace API token
-- Git
+- Python 3.8+
+- Node.js (for frontend development)
+- API keys for Hugging Face and OpenAI
 
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/wisdom-dosoo/EduSummarizerHub.git
-   cd EduSummarizerHub
-   ```
-
-2. **Backend Setup**
-   ```bash
-   cd backend
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
-
-3. **Environment Configuration**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your API keys and database credentials
-   ```
-
-4. **Run the Application**
-   ```bash
-   # Backend
-   uvicorn main:app --reload --host 0.0.0.0 --port 8000
-
-   # Frontend (in new terminal)
-   cd ../frontend
-   python -m http.server 3000  # or use any local server
-   ```
-
-5. **Access the Application**
-   - Frontend: http://localhost:3000
-   - API Docs: http://localhost:8000/docs
-   - Admin Dashboard: http://localhost:3000/dashboard
-
-## 📖 Usage Guide
-
-### For Students
-1. **Upload Content**: Drag & drop or select text files/articles
-2. **AI Summarization**: Get intelligent summaries in seconds
-3. **Language Translation**: Translate to your preferred language
-4. **Interactive Learning**: Take AI-generated quizzes
-5. **Track Progress**: Monitor your learning analytics
-
-### For Educators
-- Create engaging learning materials
-- Generate assessment questions automatically
-- Track student progress and engagement
-- Customize learning paths
-
-## 🔌 API Reference
-
-### Authentication Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| N/A | N/A | No authentication required for open source version |
-
-### Core Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/upload` | Upload and process text files |
-| `POST` | `/summarize` | Generate AI-powered summaries |
-| `POST` | `/translate` | Translate text between languages |
-| `POST` | `/quiz` | Generate interactive quiz questions |
-| `GET` | `/health` | API health check |
-
-### Example API Usage
-
-```python
-import requests
-
-# Summarize text
-response = requests.post("http://localhost:8000/summarize",
-    json={"text": "Your long text here..."})
-summary = response.json()["summary"]
-
-# Translate text
-response = requests.post("http://localhost:8000/translate",
-    json={"text": "Hello world", "target_language": "es"})
-translation = response.json()["translated_text"]
-
-# Generate quiz
-response = requests.post("http://localhost:8000/quiz",
-    json={"summary": "Your summary here", "num_questions": 5})
-quiz = response.json()["questions"]
-```
-
-## 🌐 Live Demo
-
-- **Frontend Application**: [Vercel Deployment](https://edusummarizer-hub.vercel.app)
-- **Backend API**: [Render Deployment]
-- **Interactive Demo**: [Watch Video](./docs/demo.mp4)
-
-## 📸 Screenshots
-
-<div align="center">
-  <img src="./docs/screenshots/screenshot1.png" alt="Dashboard" width="400"/>
-  <img src="./docs/screenshots/screenshot2.png" alt="Quiz Interface" width="400"/>
-  <img src="./docs/screenshots/translator.png" alt="Translator" width="400"/>
-  <img src="./docs/screenshots/backend.png" alt="FastAPI" width="400"/>
-</div>
-
-## 🏗️ Architecture
-
-```
-EduSummarizer Hub/
-├── frontend/          # Vanilla JS application
-│   ├── index.html     # Landing page
-│   ├── upload.html    # Upload and process page
-│   ├── script.js      # Main application logic
-│   └── styles.css     # TailwindCSS styling
-├── backend/           # FastAPI application
-│   ├── main.py        # Application entry point
-│   ├── routes/        # API endpoint modules
-│   │   ├── auth.py    # Authentication endpoints
-│   │   └── core.py    # Core AI endpoints
-│   ├── models.py      # Pydantic data models
-│   └── database.py    # MongoDB connection
-├── docs/              # Documentation and assets
-└── README.md          # This file
-```
-
-## 🔧 Development
-
-### Running Tests
+### Backend Setup
 ```bash
-# Backend tests
 cd backend
-pytest
+pip install -r requirements.txt
+# Set environment variables
+export HUGGINGFACE_API_KEY="your-key-here"
+export OPENAI_API_KEY="your-key-here"
+uvicorn main:app --reload
+```
 
-# Frontend tests (if implemented)
+### Frontend Setup
+```bash
 cd frontend
-npm test
+npm install
+npm run dev
+```
+
+## 🚀 Deployment
+
+### Vercel Deployment
+
+#### Backend Deployment
+```bash
+cd backend
+vercel --prod
+# Set environment variables in Vercel dashboard
+```
+
+#### Frontend Deployment
+```bash
+cd frontend
+vercel --prod
 ```
 
 ### Environment Variables
-Create a `.env` file in the backend directory:
+- `HUGGINGFACE_API_KEY`: Your Hugging Face API key
+- `OPENAI_API_KEY`: Your OpenAI API key
 
-```env
-MONGODB_URL=mongodb://localhost:27017/edusummarizer
-HUGGINGFACE_API_KEY=your-huggingface-api-key
-REDIS_URL=redis://localhost
+## 📁 Project Structure
+
+```
+EduSummarizerHub/
+├── backend/
+│   ├── main.py              # FastAPI application
+│   ├── cache.py             # In-memory caching
+│   ├── routes/
+│   │   ├── summarize.py     # Summarization endpoint
+│   │   ├── translate.py     # Translation endpoint
+│   │   ├── quiz.py          # Quiz generation endpoint
+│   │   └── upload.py        # File upload processing
+│   ├── requirements.txt     # Python dependencies
+│   └── vercel.json          # Vercel deployment config
+├── frontend/
+│   ├── index.html           # Landing page
+│   ├── upload.html          # Upload interface
+│   ├── summary.html         # Summary display
+│   ├── quiz.html            # Quiz interface
+│   ├── dashboard.html       # User dashboard
+│   ├── script.js            # Main JavaScript
+│   ├── sample-content.js    # Demo content
+│   ├── styles.css           # Custom styles
+│   ├── package.json         # Node dependencies
+│   └── vercel.json          # Vercel deployment config
+├── docs/
+│   ├── plan.md              # Project planning
+│   └── MVP.md               # MVP specifications
+└── README.md
 ```
 
-### Contributing
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+## 🔧 API Endpoints
+
+### POST /upload/
+Upload and process files
+- **Input**: Multipart form data with file
+- **Output**: Extracted text content
+
+### POST /summarize/
+Generate AI summary
+- **Input**: `{"text": "content to summarize"}`
+- **Output**: `{"summary": "generated summary"}`
+
+### POST /translate/
+Translate text
+- **Input**: `{"text": "text to translate", "target_language": "es"}`
+- **Output**: `{"translated_text": "translated content"}`
+
+### POST /quiz/
+Generate quiz questions
+- **Input**: `{"summary": "summary text", "num_questions": 5}`
+- **Output**: `{"questions": [...]}`
+
+## 🎯 Usage
+
+1. **Try Samples**: Click sample buttons on homepage to explore features
+2. **Upload Content**: Drag & drop files or paste text in the upload form
+3. **Get Summary**: AI generates concise summaries of your content
+4. **Translate**: Choose target language for translation
+5. **Take Quiz**: Test knowledge with AI-generated questions
+
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
-
-## 📊 Performance Metrics
-
-- **API Response Time**: <200ms average
-- **Summarization Accuracy**: 92% ROUGE-L score
-- **Translation Quality**: BLEU score >0.8
-- **Uptime**: 99.9% SLA
-- **Concurrent Users**: 1000+ supported
-
-## 🤝 Community
-
-- **Issues**: [Report bugs](https://github.com/wisdom-dosoo/EduSummarizerHub/issues)
-- **Discussions**: [Join conversations](https://github.com/wisdom-dosoo/EduSummarizerHub/discussions)
-- **Discord**: [Chat with community](https://discord.gg/edusummarizer)
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see LICENSE file for details
 
 ## 🙏 Acknowledgments
 
-- **HuggingFace** for providing state-of-the-art NLP models
-- **FastAPI** community for the amazing web framework
-- **TailwindCSS** for the utility-first CSS framework
-- **MongoDB** for the flexible document database
-- **Stripe** for secure payment processing
-- **Argon2** for modern password hashing
-
-## 📞 Contact
-
-**Wisdom Dosoo**
-- GitHub: [@wisdom-dosoo](https://github.com/wisdom-dosoo)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/wisdomdosoo1)
-- Email: dosoowisdom1@gmail.com
+- Hugging Face for AI model hosting
+- OpenAI for translation services
+- Tailwind CSS for styling framework
+- FastAPI for the backend framework
 
 ---
 
-<div align="center">
-  <p><strong>Built with ❤️ for the future of education</strong></p>
-  <p>
-    <a href="#-overview">Overview</a> •
-    <a href="#-key-features">Features</a> •
-    <a href="#-quick-start">Quick Start</a> •
-    <a href="#-api-reference">API</a> •
-    <a href="#-live-demo">Demo</a>
-  </p>
-</div>
+**EduSummarizer Hub** - Making education more accessible and efficient with AI ✨

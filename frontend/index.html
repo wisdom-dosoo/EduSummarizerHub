@@ -49,40 +49,104 @@
     <main class="container mx-auto mt-4 md:mt-6 lg:mt-8 px-2 md:px-4">
         <div class="text-center">
             <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-2 md:mb-4">Welcome to EduSummarizer Hub</h2>
-            <p class="text-base md:text-lg lg:text-xl text-gray-600 mb-4 md:mb-6 lg:mb-8">Upload your educational content and let AI help you learn better!</p>
+            <p class="text-base md:text-lg lg:text-xl text-gray-600 mb-4 md:mb-6 lg:mb-8">Transform your educational content with AI-powered summaries, translations, and quizzes. Start learning smarter today!</p>
+
+            <!-- Hero CTA Section -->
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 md:p-6 lg:p-8 rounded-lg shadow-lg mb-6 md:mb-8 lg:mb-12">
+                <h3 class="text-lg md:text-xl lg:text-2xl font-bold mb-2 md:mb-3 lg:mb-4">🚀 Try It Now - No Upload Required!</h3>
+                <p class="text-sm md:text-base lg:text-lg mb-3 md:mb-4 lg:mb-6">Explore our AI features with pre-loaded educational content</p>
+                <div class="flex flex-col sm:flex-row gap-2 md:gap-3 lg:gap-4 justify-center">
+                    <a href="upload.html?sample=history" class="inline-block bg-white text-blue-600 px-4 md:px-6 py-2 md:py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 text-sm md:text-base">
+                        📚 History Sample
+                    </a>
+                    <a href="upload.html?sample=science" class="inline-block bg-white text-green-600 px-4 md:px-6 py-2 md:py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 text-sm md:text-base">
+                        🔬 Science Sample
+                    </a>
+                    <a href="upload.html?sample=literature" class="inline-block bg-white text-purple-600 px-4 md:px-6 py-2 md:py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 text-sm md:text-base">
+                        📖 Literature Sample
+                    </a>
+                    <a href="upload.html?sample=technology" class="inline-block bg-white text-orange-600 px-4 md:px-6 py-2 md:py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 text-sm md:text-base">
+                        💻 Tech Sample
+                    </a>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 mb-6 md:mb-8 lg:mb-12">
+                <div class="bg-white p-3 md:p-4 lg:p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
+                    <h3 class="text-lg md:text-xl lg:text-2xl font-semibold mb-2 md:mb-3 lg:mb-4 text-blue-600">📄 Smart Summaries</h3>
+                    <p class="text-xs md:text-sm lg:text-base text-gray-600 mb-3">Get concise, accurate summaries of complex educational content in seconds using advanced AI.</p>
+                    <ul class="text-left text-xs md:text-sm text-gray-500 space-y-1">
+                        <li>• Extract key concepts</li>
+                        <li>• Preserve important details</li>
+                        <li>• Multiple length options</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-3 md:p-4 lg:p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
+                    <h3 class="text-lg md:text-xl lg:text-2xl font-semibold mb-2 md:mb-3 lg:mb-4 text-green-600">🌍 Global Translation</h3>
+                    <p class="text-xs md:text-sm lg:text-base text-gray-600 mb-3">Break language barriers with professional-quality translations to 8+ languages.</p>
+                    <ul class="text-left text-xs md:text-sm text-gray-500 space-y-1">
+                        <li>• Spanish, French, German</li>
+                        <li>• Chinese, Japanese, Korean</li>
+                        <li>• Italian, Portuguese</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-3 md:p-4 lg:p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
+                    <h3 class="text-lg md:text-xl lg:text-2xl font-semibold mb-2 md:mb-3 lg:mb-4 text-purple-600">🧠 Interactive Quizzes</h3>
+                    <p class="text-xs md:text-sm lg:text-base text-gray-600 mb-3">Test your knowledge with AI-generated quizzes tailored to your content.</p>
+                    <ul class="text-left text-xs md:text-sm text-gray-500 space-y-1">
+                        <li>• Multiple choice questions</li>
+                        <li>• Instant feedback</li>
+                        <li>• Track your progress</li>
+                    </ul>
+                </div>
+            </div>
 
             <!-- Testimonials Section -->
-            <div class="bg-white p-3 md:p-6 lg:p-8 rounded-lg shadow-md mt-4 md:mt-8 lg:mt-12 mb-4 md:mb-6 lg:mb-8">
+            <div class="bg-white p-3 md:p-6 lg:p-8 rounded-lg shadow-md mb-6 md:mb-8 lg:mb-12">
                 <h3 class="text-lg md:text-xl lg:text-2xl font-bold mb-3 md:mb-4 lg:mb-6">What Our Users Say</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 lg:gap-6">
                     <div class="border-l-4 border-blue-500 pl-2 md:pl-3 lg:pl-4 py-2">
-                        <p class="italic text-gray-600 text-xs md:text-sm lg:text-base">"EduSummarizer Hub saved me hours on studying. The AI summaries are spot-on!"</p>
+                        <p class="italic text-gray-600 text-xs md:text-sm lg:text-base">"EduSummarizer Hub saved me hours on studying. The AI summaries are spot-on and the sample content helped me get started immediately!"</p>
                         <p class="font-semibold mt-2 text-xs md:text-sm lg:text-base">- Sarah, College Student</p>
                     </div>
                     <div class="border-l-4 border-green-500 pl-2 md:pl-3 lg:pl-4 py-2">
-                        <p class="italic text-gray-600 text-xs md:text-sm lg:text-base">"Perfect for international students. Translation feature is a game-changer."</p>
+                        <p class="italic text-gray-600 text-xs md:text-sm lg:text-base">"Perfect for international students. The translation feature and sample content in different subjects is a game-changer."</p>
                         <p class="font-semibold mt-2 text-xs md:text-sm lg:text-base">- Miguel, Graduate Researcher</p>
                     </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 mt-4 md:mt-8 lg:mt-12">
-                <div class="bg-white p-3 md:p-4 lg:p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
-                    <h3 class="text-lg md:text-xl lg:text-2xl font-semibold mb-2 md:mb-3 lg:mb-4">📄 Summarize</h3>
-                    <p class="text-xs md:text-sm lg:text-base">Get concise summaries of your lecture notes and articles.</p>
-                </div>
-                <div class="bg-white p-3 md:p-4 lg:p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
-                    <h3 class="text-lg md:text-xl lg:text-2xl font-semibold mb-2 md:mb-3 lg:mb-4">🌍 Translate</h3>
-                    <p class="text-xs md:text-sm lg:text-base">Translate content to multiple languages for global learning.</p>
-                </div>
-                <div class="bg-white p-3 md:p-4 lg:p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
-                    <h3 class="text-lg md:text-xl lg:text-2xl font-semibold mb-2 md:mb-3 lg:mb-4">🧠 Quiz</h3>
-                    <p class="text-xs md:text-sm lg:text-base">Test your knowledge with AI-generated quizzes.</p>
+            <!-- How It Works Section -->
+            <div class="bg-gray-50 p-4 md:p-6 lg:p-8 rounded-lg mb-6 md:mb-8 lg:mb-12">
+                <h3 class="text-lg md:text-xl lg:text-2xl font-bold mb-4 md:mb-6 lg:mb-8 text-gray-800">How It Works</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+                    <div class="text-center">
+                        <div class="bg-blue-100 rounded-full w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-3 md:mb-4">
+                            <span class="text-xl md:text-2xl font-bold text-blue-600">1</span>
+                        </div>
+                        <h4 class="font-semibold text-sm md:text-base lg:text-lg mb-2">Upload or Try Samples</h4>
+                        <p class="text-xs md:text-sm text-gray-600">Choose from our demo content or upload your own files/text</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-green-100 rounded-full w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-3 md:mb-4">
+                            <span class="text-xl md:text-2xl font-bold text-green-600">2</span>
+                        </div>
+                        <h4 class="font-semibold text-sm md:text-base lg:text-lg mb-2">AI Processing</h4>
+                        <p class="text-xs md:text-sm text-gray-600">Our AI analyzes and transforms your content instantly</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-purple-100 rounded-full w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-3 md:mb-4">
+                            <span class="text-xl md:text-2xl font-bold text-purple-600">3</span>
+                        </div>
+                        <h4 class="font-semibold text-sm md:text-base lg:text-lg mb-2">Learn & Grow</h4>
+                        <p class="text-xs md:text-sm text-gray-600">Access summaries, translations, and quizzes to enhance learning</p>
+                    </div>
                 </div>
             </div>
 
-            <a href="upload.html" class="inline-block bg-blue-600 text-white px-6 md:px-8 py-2 md:py-3 rounded-lg text-sm md:text-base lg:text-lg font-semibold mt-4 md:mt-6 lg:mt-8 hover:bg-blue-700 transition duration-300 transform hover:scale-105">
-                Get Started
+            <a href="upload.html" class="inline-block bg-blue-600 text-white px-6 md:px-8 py-2 md:py-3 rounded-lg text-sm md:text-base lg:text-lg font-semibold mt-4 md:mt-6 lg:mt-8 hover:bg-blue-700 transition duration-300 transform hover:scale-105 shadow-lg">
+                Get Started Free
             </a>
         </div>
     </main>

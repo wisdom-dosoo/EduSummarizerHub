@@ -1,0 +1,24 @@
+{
+  "name": "edusummarizer-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for EduSummarizer Hub - AI-powered educational content tools",
+  "main": "index.html",
+  "scripts": {
+    "dev": "serve .",
+    "build": "echo 'No build step required for static site'",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "education",
+    "ai",
+    "summarization",
+    "translation",
+    "quiz",
+    "learning"
+  ],
+  "author": "EduSummarizer Hub",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

@@ -71,6 +71,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Check for sample content URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const sampleParam = urlParams.get('sample');
+    if (sampleParam && window.loadSampleContent) {
+        loadSampleContent(sampleParam);
+    }
+
     // Upload form handling
     const uploadForm = document.getElementById('uploadForm');
     if (uploadForm) {

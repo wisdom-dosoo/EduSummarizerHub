@@ -45,7 +45,7 @@ This MVP ships in 2-4 weeks, focusing on quality over quantity.
 ### 4. Content and Deployment (Medium Priority)
 - [ ] **Sample Content**: Add demo text/files for users to try without uploading.
 - [ ] **SEO and Landing Page**: Optimize index.html for search engines, add clear CTAs and feature explanations.
-- [ ] **Deployment Setup**: Deploy backend to Railway/Vercel, frontend to Vercel. Ensure environment variables are configured.
+- [ ] **Deployment Setup**: Deploy backend to Vercel, frontend to Vercel. Ensure environment variables are configured.
 
 ### 5. Basic Analytics and Feedback (Medium Priority)
 - [ ] **User Tracking**: Add simple Google Analytics to track page views and feature usage.
