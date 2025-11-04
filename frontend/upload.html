@@ -38,37 +38,53 @@
         </div>
     </nav>
 
-    <main class="container mx-auto mt-8 px-4">
-        <div class="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-lg shadow-md">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">Upload Your Content</h2>
+    <main class="container mx-auto mt-4 md:mt-6 lg:mt-8 px-2 md:px-4">
+        <div class="max-w-2xl mx-auto bg-white p-3 md:p-4 lg:p-6 rounded-lg shadow-md">
+            <h2 class="text-lg md:text-xl lg:text-2xl font-bold text-center mb-3 md:mb-4 lg:mb-6">Upload Your Content</h2>
 
             <form id="uploadForm" enctype="multipart/form-data">
-                <div class="mb-6">
-                    <label for="file" class="block text-sm font-medium text-gray-700 mb-2">
-                        Select a file (.txt, .md, .docx, .pdf, .csv, .xlsx)
-                    </label>
-                    <input type="file" id="file" name="file" accept=".txt,.md,.docx,.pdf,.csv,.xlsx"
-                           class="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base">
+                <div class="mb-4 md:mb-6 drop-zone border-2 border-dashed border-gray-300 rounded-lg p-4 md:p-6 text-center hover:border-blue-400 transition-colors duration-300 bg-gray-50 hover:bg-blue-50">
+                    <div class="space-y-3 md:space-y-4">
+                        <div class="text-3xl md:text-4xl text-gray-400">
+                            <svg class="mx-auto h-10 w-10 md:h-12 md:w-12" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <label for="file" class="cursor-pointer">
+                                <span class="text-blue-600 hover:text-blue-800 font-medium text-sm md:text-base">Click to upload</span>
+                                <span class="text-gray-500 text-sm md:text-base"> or drag and drop</span>
+                            </label>
+                            <input type="file" id="file" name="file" accept=".txt,.md,.docx,.pdf,.csv,.xlsx" class="hidden">
+                            <p class="text-xs md:text-sm text-gray-500 mt-1">Supported formats: .txt, .md, .docx, .pdf, .csv, .xlsx</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="mb-6">
+                <div class="mb-4 md:mb-6">
                     <label for="text" class="block text-sm font-medium text-gray-700 mb-2">
                         Or paste your text here
                     </label>
-                    <textarea id="text" name="text" rows="8 md:rows-10"
+                    <textarea id="text" name="text" rows="6 md:rows-8 lg:rows-10"
                               class="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base resize-vertical"
                               placeholder="Paste your lecture notes or article content here..."></textarea>
                 </div>
 
                 <button type="submit" id="submitBtn"
-                        class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 transition duration-300 transform hover:scale-105 text-base md:text-lg font-semibold">
+                        class="w-full bg-blue-600 text-white py-2 md:py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 transition duration-300 transform hover:scale-105 text-sm md:text-base lg:text-lg font-semibold">
                     Process Content
                 </button>
             </form>
 
             <div id="loading" class="hidden mt-6 text-center">
-                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-                <p class="mt-3 text-gray-600 text-sm md:text-base">Processing your content...</p>
+                <div class="mb-4">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                    <div id="progress-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+                <p class="text-gray-600 text-sm md:text-base">Processing your content...</p>
+                <p id="progress-text" class="text-xs text-gray-500 mt-1">0%</p>
             </div>
 
             <div id="result" class="hidden mt-6 md:mt-8">

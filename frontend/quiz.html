@@ -38,39 +38,39 @@
         </div>
     </nav>
 
-    <main class="container mx-auto mt-6 md:mt-8 px-4">
+    <main class="container mx-auto mt-4 md:mt-6 lg:mt-8 px-2 md:px-4">
         <div class="max-w-2xl mx-auto">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">Knowledge Quiz</h2>
+            <h2 class="text-lg md:text-xl lg:text-2xl font-bold text-center mb-3 md:mb-4 lg:mb-6">Knowledge Quiz</h2>
 
-            <div id="quizContainer" class="bg-white p-4 md:p-6 rounded-lg shadow-md">
-                <div id="question" class="mb-4 md:mb-6">
-                    <h3 class="text-lg md:text-xl font-semibold mb-3 md:mb-4">Question 1</h3>
-                    <p id="questionText" class="text-sm md:text-base leading-relaxed">Loading question...</p>
+            <div id="quizContainer" class="bg-white p-3 md:p-4 lg:p-6 rounded-lg shadow-md">
+                <div id="question" class="mb-3 md:mb-4 lg:mb-6">
+                    <h3 class="text-base md:text-lg lg:text-xl font-semibold mb-2 md:mb-3 lg:mb-4">Question 1</h3>
+                    <p id="questionText" class="text-xs md:text-sm lg:text-base leading-relaxed">Loading question...</p>
                 </div>
 
-                <div id="options" class="space-y-2 md:space-y-3 mb-4 md:mb-6">
+                <div id="options" class="space-y-2 md:space-y-3 mb-3 md:mb-4 lg:mb-6">
                     <!-- Options will be populated by JavaScript -->
                 </div>
 
-                <div class="flex justify-between gap-3 md:gap-4">
-                    <button id="prevBtn" class="bg-gray-500 text-white px-3 md:px-4 py-2 rounded-md disabled:opacity-50 transition duration-300 text-sm md:text-base font-semibold flex-1 md:flex-none" disabled>
+                <div class="flex flex-col sm:flex-row justify-between gap-2 md:gap-3 lg:gap-4">
+                    <button id="prevBtn" class="bg-gray-500 text-white px-3 md:px-4 py-2 rounded-md disabled:opacity-50 transition duration-300 text-xs md:text-sm lg:text-base font-semibold flex-1" disabled>
                         Previous
                     </button>
-                    <button id="nextBtn" class="bg-blue-600 text-white px-3 md:px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300 transform hover:scale-105 text-sm md:text-base font-semibold flex-1 md:flex-none">
+                    <button id="nextBtn" class="bg-blue-600 text-white px-3 md:px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300 transform hover:scale-105 text-xs md:text-sm lg:text-base font-semibold flex-1">
                         Next
                     </button>
                 </div>
             </div>
 
-            <div id="results" class="hidden bg-white p-4 md:p-6 rounded-lg shadow-md mt-6 md:mt-8">
-                <h3 class="text-xl md:text-2xl font-bold text-center mb-3 md:mb-4">Quiz Complete!</h3>
+            <div id="results" class="hidden bg-white p-3 md:p-4 lg:p-6 rounded-lg shadow-md mt-4 md:mt-6 lg:mt-8">
+                <h3 class="text-lg md:text-xl lg:text-2xl font-bold text-center mb-2 md:mb-3 lg:mb-4">Quiz Complete!</h3>
                 <div class="text-center">
-                    <p class="text-base md:text-lg mb-4">Your Score: <span id="score" class="font-bold text-blue-600">0</span>/<span id="total" class="font-bold">0</span></p>
+                    <p class="text-sm md:text-base lg:text-lg mb-3 md:mb-4">Your Score: <span id="score" class="font-bold text-blue-600">0</span>/<span id="total" class="font-bold">0</span></p>
                     <div class="space-y-2 md:space-y-3">
-                        <a href="summary.html" class="block bg-green-600 text-white py-2 md:py-3 px-4 rounded-md hover:bg-green-700 transition duration-300 transform hover:scale-105 text-sm md:text-base font-semibold">
+                        <a href="summary.html" class="block bg-green-600 text-white py-2 md:py-3 px-4 rounded-md hover:bg-green-700 transition duration-300 transform hover:scale-105 text-xs md:text-sm lg:text-base font-semibold">
                             Review Summary
                         </a>
-                        <a href="dashboard.html" class="block bg-blue-600 text-white py-2 md:py-3 px-4 rounded-md hover:bg-blue-700 transition duration-300 transform hover:scale-105 text-sm md:text-base font-semibold">
+                        <a href="dashboard.html" class="block bg-blue-600 text-white py-2 md:py-3 px-4 rounded-md hover:bg-blue-700 transition duration-300 transform hover:scale-105 text-xs md:text-sm lg:text-base font-semibold">
                             View Dashboard
                         </a>
                     </div>

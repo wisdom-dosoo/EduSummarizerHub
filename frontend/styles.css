@@ -73,8 +73,8 @@ nav {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .container {
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 
     nav .space-x-4 > * + * {
@@ -115,30 +115,113 @@ nav {
 
     /* Better spacing for mobile */
     main {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
     }
 
     /* Feature cards mobile layout */
     .grid {
-        gap: 1.5rem;
+        gap: 1rem;
     }
 
     .bg-white {
-        padding: 1.5rem;
+        padding: 1rem;
     }
 
     /* Button improvements */
     .inline-block {
         width: 100%;
-        max-width: 300px;
-        margin: 2rem auto 0;
+        max-width: 100%;
+        margin: 1.5rem auto 0;
+    }
+}
+
+/* Extra small screens (phones < 480px) */
+@media (max-width: 480px) {
+    .container {
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+    }
+
+    nav {
+        padding: 0.75rem;
+    }
+
+    nav h1 {
+        font-size: 1.25rem;
+    }
+
+    main {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .bg-white {
+        padding: 0.75rem;
+    }
+
+    /* Smaller text on very small screens */
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    p {
+        font-size: 0.875rem;
+    }
+
+    /* Adjust grid gaps */
+    .grid {
+        gap: 0.75rem;
+    }
+
+    /* Button sizing */
+    button, .inline-block {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    /* Form inputs */
+    input, textarea, select {
+        font-size: 0.875rem;
+        padding: 0.5rem;
     }
 }
 
 /* Smooth scrolling */
 html {
     scroll-behavior: smooth;
+}
+
+/* Page transition effects */
+.page-transition {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.page-transition.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Fade in animation for content */
+.fade-in-content {
+    animation: fadeInContent 0.6s ease-out;
+}
+
+@keyframes fadeInContent {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Focus states for accessibility */
