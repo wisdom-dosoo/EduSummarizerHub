@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload - EduSummarizer Hub</title>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,6 +25,7 @@
                 <a href="index.html" class="hover:underline transition duration-300">Home</a>
                 <a href="upload.html" class="hover:underline transition duration-300">Upload</a>
                 <a href="dashboard.html" class="hover:underline transition duration-300">Dashboard</a>
+                <a href="contact.html" class="hover:underline transition duration-300">Contact</a>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -34,6 +43,7 @@
                 <a href="index.html" class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300 block">Home</a>
                 <a href="upload.html" class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300 block">Upload</a>
                 <a href="dashboard.html" class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300 block">Dashboard</a>
+                <a href="contact.html" class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300 block">Contact</a>
             </div>
         </div>
     </nav>
@@ -55,8 +65,8 @@
                                 <span class="text-blue-600 hover:text-blue-800 font-medium text-sm md:text-base">Click to upload</span>
                                 <span class="text-gray-500 text-sm md:text-base"> or drag and drop</span>
                             </label>
-                            <input type="file" id="file" name="file" accept=".txt,.md,.docx,.pdf,.csv,.xlsx" class="hidden">
-                            <p class="text-xs md:text-sm text-gray-500 mt-1">Supported formats: .txt, .md, .docx, .pdf, .csv, .xlsx</p>
+                            <input type="file" id="file" name="file" accept=".txt,.md,.docx,.pdf,.csv,.xlsx,.pptx" class="hidden">
+                            <p class="text-xs md:text-sm text-gray-500 mt-1">Supported formats: .txt, .md, .docx, .pdf, .csv, .xlsx, .pptx</p>
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 async def upload_file(file: UploadFile = File(...)):
     try:
         # Validate file type
-        allowed_extensions = ['.txt', '.md', '.docx', '.pdf', '.csv', '.xlsx']
+        allowed_extensions = ['.txt', '.md', '.docx', '.pdf', '.csv', '.xlsx', '.pptx']
         if not any(file.filename.lower().endswith(ext) for ext in allowed_extensions):
             logger.warning(f"Invalid file type attempted: {file.filename}")
             raise HTTPException(status_code=400, detail=f"Only {', '.join(allowed_extensions)} files are allowed")

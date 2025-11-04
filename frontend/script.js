@@ -103,70 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeDragDrop();
 });
 
-async function handleUpload(e) {
-    e.preventDefault();
 
-    const fileInput = document.getElementById('file');
-    const textInput = document.getElementById('text');
-    const submitBtn = document.getElementById('submitBtn');
-    const loading = document.getElementById('loading');
-    const result = document.getElementById('result');
-
-    if (!fileInput.files[0] && !textInput.value.trim()) {
-        alert('Please select a file or enter text');
-        return;
-    }
-
-    submitBtn.disabled = true;
-    loading.classList.remove('hidden');
-    result.classList.add('hidden');
-
-    try {
-        let text = textInput.value.trim();
-
-        if (fileInput.files[0]) {
-            const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
-
-            const response = await fetch(`${API_BASE}/upload/`, {
-                method: 'POST',
-                body: formData
-            });
-
-            if (!response.ok) throw new Error('Upload failed');
-
-            const data = await response.json();
-            text = data.content;
-        }
-
-        currentText = text;
-
-        // Generate summary
-        const summaryResponse = await fetch(`${API_BASE}/summarize/`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: text })
-        });
-
-        if (!summaryResponse.ok) throw new Error('Summary generation failed');
-
-        const summaryData = await summaryResponse.json();
-        currentSummary = summaryData.summary;
-
-        // Store in localStorage for page navigation
-        localStorage.setItem('currentText', currentText);
-        localStorage.setItem('currentSummary', currentSummary);
-
-        loading.classList.add('hidden');
-        result.classList.remove('hidden');
-
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
-        loading.classList.add('hidden');
-        submitBtn.disabled = false;
-    }
-}
 
 function loadSummary() {
     currentText = localStorage.getItem('currentText') || '';

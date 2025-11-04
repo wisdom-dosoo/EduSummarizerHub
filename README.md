@@ -49,56 +49,84 @@ AI-powered educational content tools for students and educators. Transform your 
 - Python 3.8+
 - Node.js (for frontend development)
 - API keys for Hugging Face and OpenAI
+- MongoDB (local or cloud instance)
 
 ### Backend Setup
 ```bash
 cd backend
 pip install -r requirements.txt
 # Set environment variables
-export HUGGINGFACE_API_KEY="your-key-here"
-export OPENAI_API_KEY="your-key-here"
-uvicorn main:app --reload
+export HUGGINGFACE_API_KEY="your-huggingface-api-key"
+export OPENAI_API_KEY="your-openai-api-key"
+export MONGODB_URL="your-mongodb-connection-string"
+# Run the server
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ### Frontend Setup
 ```bash
 cd frontend
-npm install
-npm run dev
+# No build process needed - static files
+# Serve locally (optional)
+npx http-server -p 3000
+```
+
+### Environment Variables
+Create a `.env` file in the backend directory:
+```
+HUGGINGFACE_API_KEY=your-huggingface-api-key
+OPENAI_API_KEY=your-openai-api-key
+MONGODB_URL=mongodb://localhost:27017/edusummarizer
 ```
 
 ## 🚀 Deployment
 
-### Vercel Deployment
+### Current Deployment Status
 
-The project is configured for Vercel deployment with the frontend and backend separated for optimal performance.
+- **Frontend**: Deployed on Vercel (static hosting)
+- **Backend**: Deployed on Render (serverless)
+- **Database**: MongoDB Atlas (cloud)
 
-#### Frontend Deployment (Static)
-The root `vercel.json` configures Vercel to serve the frontend statically:
-```json
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "frontend/index.html",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "frontend/$1"
-    }
-  ]
-}
+### Deployment Instructions
+
+#### Frontend Deployment (Vercel)
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Deploy frontend
+cd frontend
+vercel --prod
 ```
 
-#### Backend Deployment (Separate)
-Deploy the backend separately to a serverless platform (e.g., Railway, Render, or AWS Lambda) as Vercel is optimized for frontend-only deployments.
+#### Backend Deployment (Render)
+1. Connect your GitHub repository to Render
+2. Set build command: `pip install -r requirements.txt`
+3. Set start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+4. Configure environment variables in Render dashboard
 
 ### Environment Variables
 - `HUGGINGFACE_API_KEY`: Your Hugging Face API key
 - `OPENAI_API_KEY`: Your OpenAI API key
+- `MONGODB_URL`: MongoDB connection string
+- `GA_MEASUREMENT_ID`: Your Google Analytics Measurement ID (see below)
+
+### Getting Your Google Analytics Measurement ID
+
+1. **Go to Google Analytics**: Visit [analytics.google.com](https://analytics.google.com)
+2. **Create/Sign in to Account**: Sign in with your Google account
+3. **Set up a Property**:
+   - Click "Create Property"
+   - Choose "Web" as platform
+   - Enter your website details (e.g., name: "EduSummarizer Hub", URL: your deployed domain)
+4. **Get Measurement ID**:
+   - After creating the property, go to "Admin" (gear icon)
+   - Under "Property", click "Data Streams"
+   - Click on your web data stream
+   - Copy the "Measurement ID" (format: `G-XXXXXXXXXX`)
+5. **Replace in Code**: Replace `GA_MEASUREMENT_ID` in all HTML files with your actual ID
+
+**Note**: The Measurement ID is already implemented in the code - developer just need to replace the placeholder with the actual ID from their Google Analytics account.
 
 ## 📁 Project Structure
 
@@ -163,11 +191,31 @@ Generate quiz questions
 
 ## 🎯 Usage
 
-1. **Try Samples**: Click sample buttons on homepage to explore features
-2. **Upload Content**: Drag & drop files or paste text in the upload form
-3. **Get Summary**: AI generates concise summaries of your content
-4. **Translate**: Choose target language for translation
-5. **Take Quiz**: Test knowledge with AI-generated questions
+1. **Try Samples**: Click sample buttons on homepage to explore features without uploading
+2. **Upload Content**: Drag & drop files (PDF, DOCX, TXT, CSV, XLSX) or paste text directly
+3. **Get Summary**: AI generates concise, accurate summaries of your educational content
+4. **Translate**: Choose from 8+ languages (Spanish, French, German, Chinese, Japanese, Korean, Italian, Portuguese)
+5. **Take Quiz**: Test your knowledge with AI-generated multiple-choice questions
+6. **Contact Us**: Use the contact form for feedback, bug reports, or feature requests
+
+## 📊 Current Status
+
+### ✅ Completed MVP Features
+- AI-powered summarization using Hugging Face
+- Multi-language translation with OpenAI
+- Interactive quiz generation
+- File upload support (PDF, DOCX, TXT, CSV, XLSX, PPTX)
+- Responsive web interface
+- Google Analytics integration
+- Contact form with feedback collection
+- Live deployment on Vercel (frontend) and Render (backend)
+
+### 🔄 Recent Updates
+- Added Google Analytics tracking across all pages
+- Created contact page with form submission tracking
+- Updated navigation to include contact links
+- Improved deployment configuration for Render backend
+- Enhanced README with current setup instructions
 
 ## 🤝 Contributing
 
