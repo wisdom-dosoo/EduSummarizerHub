@@ -1,33 +1,33 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
-from fastapi_cache import FastAPICache
-from fastapi_cache.backends.redis import RedisBackend
-from redis import asyncio as aioredis
 import os
+import logging
 
 load_dotenv()
 
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 app = FastAPI(title="EduSummarizer Hub API", version="1.0.0")
 
-# CORS middleware for frontend integration
+# CORS middleware for frontend integration - PRODUCTION READY
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, specify your frontend URL
+    allow_origins=["http://localhost:3000", "http://localhost:4000", "http://127.0.0.1:3000", "http://127.0.0.1:4000"],  # Specify allowed origins for production
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
-# Initialize cache
-@ app.on_event("startup")
-async def startup():
-    try:
-        redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
-        FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
-    except Exception as e:
-        print(f"Redis not available, running without cache: {e}")
-        # Continue without cache if Redis is not available
+# Request logging middleware
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    logger.info(f"Request: {request.method} {request.url}")
+    response = await call_next(request)
+    logger.info(f"Response: {response.status_code}")
+    return response
 
 # Include routers
 from routes import upload, summarize, translate, quiz
@@ -39,11 +39,11 @@ app.include_router(quiz.router)
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to EduSummarizer Hub API"}
+    return {"message": "Welcome to EduSummarizer Hub API", "version": "1.0.0", "status": "running"}
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy"}
+    return {"status": "healthy", "version": "1.0.0"}
 
 if __name__ == "__main__":
     import uvicorn
