@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "serve .",
     "build": "echo 'No build step required for static site'",
-    "deploy": "vercel --prod"
+    "deploy": "render deploy"
   },
   "keywords": [
     "education",

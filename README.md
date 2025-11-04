@@ -1,6 +1,28 @@
 # EduSummarizer Hub
 
-AI-powered educational content tools for students and educators. Transform your learning materials with intelligent summaries, translations, and interactive quizzes.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com/)
+[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black.svg)](https://vercel.com)
+
+AI-powered educational content tools for students and educators. Transform your learning materials with intelligent summaries, translations, and interactive quizzes. Built with modern web technologies and deployed on Vercel for seamless performance.
+
+## 📸 Screenshots
+
+### Landing Page
+![Landing Page](docs/screenshots/screenshot1.png)
+
+### Upload Interface
+![Upload Interface](docs/screenshots/screenshot2.png)
+
+### Backend Architecture
+![Backend Architecture](docs/screenshots/backend.png)
+
+### Translation Feature
+![Translation Feature](docs/screenshots/translator.png)
+
+### Dashboard
+![Dashboard](docs/screenshots/Screenshot%202025-11-03%20115608.png)
 
 ## 🚀 Features
 
@@ -52,18 +74,30 @@ npm run dev
 
 ### Vercel Deployment
 
-#### Backend Deployment
-```bash
-cd backend
-vercel --prod
-# Set environment variables in Vercel dashboard
+The project is configured for Vercel deployment with the frontend and backend separated for optimal performance.
+
+#### Frontend Deployment (Static)
+The root `vercel.json` configures Vercel to serve the frontend statically:
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "frontend/index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "frontend/$1"
+    }
+  ]
+}
 ```
 
-#### Frontend Deployment
-```bash
-cd frontend
-vercel --prod
-```
+#### Backend Deployment (Separate)
+Deploy the backend separately to a serverless platform (e.g., Railway, Render, or AWS Lambda) as Vercel is optimized for frontend-only deployments.
 
 ### Environment Variables
 - `HUGGINGFACE_API_KEY`: Your Hugging Face API key
@@ -95,8 +129,16 @@ EduSummarizerHub/
 │   ├── package.json         # Node dependencies
 │   └── vercel.json          # Vercel deployment config
 ├── docs/
+│   ├── screenshots/         # Application screenshots
+│   │   ├── screenshot1.png  # Landing page
+│   │   ├── screenshot2.png  # Upload interface
+│   │   ├── backend.png      # Backend architecture
+│   │   ├── translator.png   # Translation feature
+│   │   └── Screenshot 2025-11-03 115608.png  # Dashboard
 │   ├── plan.md              # Project planning
 │   └── MVP.md               # MVP specifications
+├── .gitignore               # Git ignore rules
+├── vercel.json              # Root Vercel config (frontend-only)
 └── README.md
 ```
 
